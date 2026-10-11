@@ -1,6 +1,6 @@
 # Secure Supply Chain and CI
 
-PRD 09 only: build orchestration, scanning, SBOM, signing, verification and provenance. Compose project `zero-trust-supply-chain-security`; no business implementation is duplicated. The full local release gate passes with no vulnerability exceptions. Hosted CI and keyless publication remain unexecuted.
+Supply-chain workshop only: build orchestration, scanning, SBOM, signing, verification and provenance. Compose project `zero-trust-supply-chain-security`; no business implementation is duplicated. The full local release gate passes with no vulnerability exceptions. Hosted CI and keyless publication remain unexecuted.
 
 ## Run
 
@@ -33,4 +33,4 @@ bash scripts/verify.sh "$PWD/artifacts" "$PWD/.tools/local-signing.pub"
 
 Verification passes for the current local release. `signing_check.sh` proves real signature failure paths separately. CI grants read-only permissions to pull-request gates; only a successful main-branch release job receives OIDC permission for keyless signing, with exact workflow identity/issuer verification in a separate step. Hosted CI/keyless publication are configured, not executed. If nested in a repository, install the workflow in that repository's root `.github/workflows/`; it supports sequence-root and current nested checkout paths. Required-check branch protection is a repository-owner action.
 
-Evidence publication retains JSON reports for 14 days and excludes private keys and the image archive. Release consumers need the archive from an approved artifact store. PRD 10 verifies the local signature, bound hashes, image identity and severity gate before deployment.
+Evidence publication retains JSON reports for 14 days and excludes private keys and the image archive. Release consumers need the archive from an approved artifact store. The deployment-readiness workshop verifies the local signature, bound hashes, image identity and severity gate before deployment.
