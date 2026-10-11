@@ -1,0 +1,25 @@
+name: zero-trust-supply-chain-security
+services:
+  release:
+    image: zero-trust-supply-chain-security-gateway:0.1.0
+    build:
+      context: ../..
+      dockerfile: 09-supply-chain-and-ci/code/Dockerfile
+      target: release
+    profiles: [release]
+    network_mode: none
+    read_only: true
+    tmpfs: ["/tmp:size=32m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  checks:
+    image: zero-trust-supply-chain-security-checks:0.1.0
+    build:
+      context: ../..
+      dockerfile: 09-supply-chain-and-ci/code/Dockerfile
+      target: checks
+    network_mode: none
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
